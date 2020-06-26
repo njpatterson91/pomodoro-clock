@@ -11,3 +11,6 @@ p {
 #myBtn {
     padding: 5px 5px 5px 5px;
 }
+.bg-primary {
+    color: gray;
+}
