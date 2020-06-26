@@ -8,7 +8,7 @@ var roundCount = 0;
 function startPomodoro(){
     
         startStudying = setInterval(pomodoroClock, 1000);
-        stopTime = new Date().getTime() + (1000 * 10);
+        stopTime = new Date().getTime() + (1000 * 60 * 25);
         roundCount = roundCount + 1; 
         if(roundCount === 0){
         }else if (roundCount === 1){
@@ -37,9 +37,12 @@ function resetButton() {
         document.getElementById("demo").innerHTML = "";
         clearInterval(startStudying);
         clearInterval(startBreakTime);
+        roundCount = 0;
 }
 function startBreak(){
-    
+        clearInterval(startStudying);
+        startBreakTime = setInterval(breakClock, 1000);
+        stopBreakTime = new Date().getTime() + (1000 * 60 * 5);
 }
 //Timer length
 
@@ -75,14 +78,14 @@ function pomodoroClock() {
         //Countdown Variable
         var bt = stopBreakTime - nowBreak; 
         //Variables for displaying the time left
-        var minutes = Math.floor((bt % (1000 * 60 * 60)) / (1000 * 60)); 
-        var seconds = Math.floor((bt % (1000 * 60)) / 1000); 
+        var bminutes = Math.floor((bt % (1000 * 60 * 60)) / (1000 * 60)); 
+        var bseconds = Math.floor((bt % (1000 * 60)) / 1000); 
         //Display for Countdown and what you should be doing
-        document.getElementById("demo").innerHTML = minutes + " Minutes and " + seconds + " Seconds"; 
+        document.getElementById("demo").innerHTML = bminutes + " Minutes and " + bseconds + " Seconds"; 
         document.getElementById("whatYouShouldBeDoing").innerHTML = "Break"
             //What happens when timer hits 0
             if (bt < 0) { 
-                clearInterval(startBreak); 
+                clearInterval(startBreakTime); 
                 //document.getElementById("whatYouShouldBeDoing").innerHTML = "Break Time"
                 audio.play();
                 //document.getElementById("round1").checked = true;
