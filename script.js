@@ -5,11 +5,16 @@ var startBreakTime
 var stopTime
 var stopBreakTime
 var roundCount = 0;
+
+//function attacked to the start button 
 function startPomodoro(){
-    
+        //starts the timer for studying/working
         startStudying = setInterval(pomodoroClock, 1000);
+        //creates the time that the timer should end
         stopTime = new Date().getTime() + (1000 * 60 * 25);
+        //updates the variable that is checked to determine what round you re on
         roundCount = roundCount + 1; 
+        //Temporary way to track how many of the 4 rounds you have done needs to be updated has a few issues
         if(roundCount === 0){
         }else if (roundCount === 1){
             document.getElementById("round1").checked = true;
@@ -27,7 +32,7 @@ function startPomodoro(){
         }  
       
 }
-
+//function attached to the reset button clears all active timers and the round indicators
 function resetButton() {
         document.getElementById("round1").checked = false;
         document.getElementById("round2").checked = false;
@@ -39,9 +44,14 @@ function resetButton() {
         clearInterval(startBreakTime);
         roundCount = 0;
 }
+
+//function attached to the break button starts the break timer
 function startBreak(){
+        //clears the timer for studying/working in case its still running
         clearInterval(startStudying);
+        //starts the timer for break
         startBreakTime = setInterval(breakClock, 1000);
+        //sets the end time for the break countdown
         stopBreakTime = new Date().getTime() + (1000 * 60 * 5);
 }
 //Timer length
